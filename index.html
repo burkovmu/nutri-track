@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriTrack AI - Подсчет калорий</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Dashboard Screen -->
+        <div class="screen active" id="dashboard">
+            <div class="header">
+                <h1>Главная</h1>
+                <div class="profile">JD</div>
+            </div>
+            
+            <div class="welcome-section">
+                <div class="welcome-text">
+                    <h2>Здоровье - лучший выбор!</h2>
+                    <p>Маленькие изменения приводят к большим результатам</p>
+                </div>
+            </div>
+            
+            <div class="progress-circle-container">
+                <div class="progress-circle">
+                    <svg width="180" height="180" viewBox="0 0 180 180">
+                        <defs>
+                            <linearGradient id="calorie-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#3498db;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#2ecc71;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <circle class="circle-bg" cx="90" cy="90" r="75"></circle>
+                        <circle class="circle-progress" cx="90" cy="90" r="75"></circle>
+                    </svg>
+                    <div class="circle-text">
+                        <div class="calories">1,847</div>
+                        <div class="total">из 2,100 ккал</div>
+                    </div>
+                </div>
+                <div class="progress-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">253</div>
+                        <div class="stat-label">Осталось</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">88%</div>
+                        <div class="stat-label">Выполнено</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="macros-section">
+                <div class="section-header">
+                    <h3>Макронутриенты</h3>
+                    <div class="section-subtitle">Баланс питания</div>
+                </div>
+                <div class="macros">
+                    <div class="macro-item carbs">
+                        <div class="macro-header">
+                            <div class="macro-name">Углеводы</div>
+                            <div class="macro-value">162г / 250г</div>
+                        </div>
+                        <div class="macro-bar">
+                            <div class="macro-progress"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="macro-item protein">
+                        <div class="macro-header">
+                            <div class="macro-name">Белки</div>
+                            <div class="macro-value">96г / 120г</div>
+                        </div>
+                        <div class="macro-bar">
+                            <div class="macro-progress"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="macro-item fat">
+                        <div class="macro-header">
+                            <div class="macro-name">Жиры</div>
+                            <div class="macro-value">33г / 70г</div>
+                        </div>
+                        <div class="macro-bar">
+                            <div class="macro-progress"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+        </div>
+        
+        <!-- AI Food Logging Screen -->
+        <div class="screen" id="food-logging">
+            <div class="header">
+                <h1>Записать еду</h1>
+                <div class="ai-badge">
+                    <i class="ri-robot-line"></i>
+                    На базе ИИ
+                </div>
+            </div>
+            
+            <div class="input-container">
+                <textarea class="food-input" placeholder="Опишите, что вы съели..."></textarea>
+                <div class="input-actions">
+                    <div class="mic-btn">
+                        <i class="ri-mic-line"></i>
+                    </div>
+                    <button class="analyze-btn">Анализировать</button>
+                </div>
+            </div>
+            
+            <div class="example-prompts">
+                <h3>Попробуйте сказать:</h3>
+                <div class="prompt-chips">
+                    <div class="prompt-chip">Салат с курицей и оливковым маслом</div>
+                    <div class="prompt-chip">Большой латте с овсяным молоком</div>
+                    <div class="prompt-chip">Жареный лосось с рисом</div>
+                </div>
+            </div>
+            
+            <div class="results-preview">
+                <div class="results-header">
+                                    <div class="results-title">Завтрак</div>
+                <div class="results-calories">420 ккал</div>
+                </div>
+                
+                <div class="food-item">
+                    <div class="food-name">Овсянка с бананом</div>
+                    <div class="food-calories">280 ккал</div>
+                </div>
+                
+                <div class="food-item">
+                    <div class="food-name">Черный кофе</div>
+                    <div class="food-calories">5 ккал</div>
+                </div>
+                
+                <div class="food-item">
+                    <div class="food-name">Греческий йогурт</div>
+                    <div class="food-calories">135 ккал</div>
+                </div>
+                
+                <button class="add-food-btn">Добавить в журнал</button>
+            </div>
+            
+        </div>
+        
+        <!-- Profile Screen -->
+        <div class="screen" id="profile">
+            <div class="header">
+                <h1>Профиль</h1>
+                <div class="profile">JD</div>
+            </div>
+            
+            <div class="profile-info">
+                <div class="profile-avatar">
+                    <div class="avatar-circle">
+                        <i class="ri-user-line"></i>
+                    </div>
+                    <div class="profile-name">Джон Доу</div>
+                    <div class="profile-email">john.doe@example.com</div>
+                </div>
+            </div>
+            
+            <div class="profile-stats">
+                
+            </div>
+            
+            <div class="profile-settings">
+                <div class="settings-header">
+                    <h3>Настройки</h3>
+                </div>
+                
+                <div class="setting-item">
+                    <div class="setting-icon">
+                        <i class="ri-user-settings-line"></i>
+                    </div>
+                    <div class="setting-text">Личные данные</div>
+                    <div class="setting-arrow">
+                        <i class="ri-arrow-right-s-line"></i>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <div class="setting-icon">
+                        <i class="ri-notification-line"></i>
+                    </div>
+                    <div class="setting-text">Уведомления</div>
+                    <div class="setting-arrow">
+                        <i class="ri-arrow-right-s-line"></i>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <div class="setting-icon">
+                        <i class="ri-lock-line"></i>
+                    </div>
+                    <div class="setting-text">Безопасность</div>
+                    <div class="setting-arrow">
+                        <i class="ri-arrow-right-s-line"></i>
+                    </div>
+                </div>
+                
+                <div class="setting-item">
+                    <div class="setting-icon">
+                        <i class="ri-heart-line"></i>
+                    </div>
+                    <div class="setting-text">Здоровье</div>
+                    <div class="setting-arrow">
+                        <i class="ri-arrow-right-s-line"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="profile-actions">
+                <button class="logout-btn">
+                    <i class="ri-logout-box-line"></i>
+                    Выйти
+                </button>
+            </div>
+        </div>
+        
+        <!-- History Screen -->
+        <div class="screen" id="history">
+            <div class="header">
+                <h1>История</h1>
+                <div class="profile">JD</div>
+            </div>
+            
+            <div class="history-filters">
+                <div class="filter-tabs">
+                    <div class="filter-tab active">Сегодня</div>
+                    <div class="filter-tab">Вчера</div>
+                    <div class="filter-tab">Неделя</div>
+                    <div class="filter-tab">Месяц</div>
+                </div>
+            </div>
+            
+            <div class="history-content">
+                <div class="history-date">
+                    <div class="date-header">
+                        <div class="date-title">Сегодня, 15 декабря</div>
+                        <div class="date-calories">1,847 ккал</div>
+                    </div>
+                    
+                    <div class="meal-section">
+                        <div class="meal-header">
+                            <div class="meal-name">Завтрак</div>
+                            <div class="meal-time">08:30</div>
+                            <div class="meal-calories">420 ккал</div>
+                        </div>
+                        <div class="meal-items">
+                            <div class="meal-item">
+                                <div class="item-name">Овсянка с бананом</div>
+                                <div class="item-calories">180 ккал</div>
+                            </div>
+                            <div class="meal-item">
+                                <div class="item-name">Кофе с молоком</div>
+                                <div class="item-calories">120 ккал</div>
+                            </div>
+                            <div class="meal-item">
+                                <div class="item-name">Греческий йогурт</div>
+                                <div class="item-calories">120 ккал</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="meal-section">
+                        <div class="meal-header">
+                            <div class="meal-name">Обед</div>
+                            <div class="meal-time">13:00</div>
+                            <div class="meal-calories">650 ккал</div>
+                        </div>
+                        <div class="meal-items">
+                            <div class="meal-item">
+                                <div class="item-name">Куриная грудка</div>
+                                <div class="item-calories">250 ккал</div>
+                            </div>
+                            <div class="meal-item">
+                                <div class="item-name">Бурый рис</div>
+                                <div class="item-calories">200 ккал</div>
+                            </div>
+                            <div class="meal-item">
+                                <div class="item-name">Овощной салат</div>
+                                <div class="item-calories">100 ккал</div>
+                            </div>
+                            <div class="meal-item">
+                                <div class="item-name">Оливковое масло</div>
+                                <div class="item-calories">100 ккал</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="meal-section">
+                        <div class="meal-header">
+                            <div class="meal-name">Ужин</div>
+                            <div class="meal-time">19:30</div>
+                            <div class="meal-calories">777 ккал</div>
+                        </div>
+                        <div class="meal-items">
+                            <div class="meal-item">
+                                <div class="item-name">Лосось на гриле</div>
+                                <div class="item-calories">300 ккал</div>
+                            </div>
+                            <div class="meal-item">
+                                <div class="item-name">Киноа</div>
+                                <div class="item-calories">150 ккал</div>
+                            </div>
+                            <div class="meal-item">
+                                <div class="item-name">Брокколи</div>
+                                <div class="item-calories">55 ккал</div>
+                            </div>
+                            <div class="meal-item">
+                                <div class="item-name">Авокадо</div>
+                                <div class="item-calories">160 ккал</div>
+                            </div>
+                            <div class="meal-item">
+                                <div class="item-name">Орехи</div>
+                                <div class="item-calories">112 ккал</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Progress Tracking Screen -->
+        <div class="screen" id="progress">
+            <div class="header">
+                <h1>Прогресс</h1>
+                <div class="profile">JD</div>
+            </div>
+            
+            <div class="chart-container">
+                <div class="chart-header">
+                                    <div class="chart-title">Тренд веса</div>
+                <div class="chart-period">Последние 30 дней</div>
+                </div>
+                
+                <div class="weight-chart">
+                    <div class="chart-line"></div>
+                    <div class="chart-points">
+                        <div class="chart-point">
+                            <div class="point-line" style="height: 60px;"></div>
+                            <div class="point-dot"></div>
+                            <div class="point-date">1</div>
+                        </div>
+                        <div class="chart-point">
+                            <div class="point-line" style="height: 70px;"></div>
+                            <div class="point-dot"></div>
+                            <div class="point-date">5</div>
+                        </div>
+                        <div class="chart-point">
+                            <div class="point-line" style="height: 85px;"></div>
+                            <div class="point-dot"></div>
+                            <div class="point-date">10</div>
+                        </div>
+                        <div class="chart-point">
+                            <div class="point-line" style="height: 95px;"></div>
+                            <div class="point-dot"></div>
+                            <div class="point-date">15</div>
+                        </div>
+                        <div class="chart-point">
+                            <div class="point-line" style="height: 110px;"></div>
+                            <div class="point-dot"></div>
+                            <div class="point-date">20</div>
+                        </div>
+                        <div class="chart-point">
+                            <div class="point-line" style="height: 120px;"></div>
+                            <div class="point-dot"></div>
+                            <div class="point-date">25</div>
+                        </div>
+                        <div class="chart-point">
+                            <div class="point-line" style="height: 130px;"></div>
+                            <div class="point-dot"></div>
+                            <div class="point-date">30</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">-4.2 kg</div>
+                    <div class="stat-label">Общая потеря</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-value">28</div>
+                    <div class="stat-label">Дней подряд</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-value">1,950</div>
+                    <div class="stat-label">Ср. калории</div>
+                </div>
+            </div>
+            
+            <div class="badges-container">
+                <div class="badges-header">
+                    <div class="stat-label">Достижения</div>
+                </div>
+                
+                <div class="badges-grid">
+                    <div class="badge">
+                        <div class="badge-icon">
+                            <i class="ri-fire-line"></i>
+                        </div>
+                        <div class="badge-name">30 дней подряд</div>
+                    </div>
+                    
+                    <div class="badge">
+                        <div class="badge-icon">
+                            <i class="ri-award-line"></i>
+                        </div>
+                        <div class="badge-name">Потеряно 5кг</div>
+                    </div>
+                    
+                    <div class="badge">
+                        <div class="badge-icon">
+                            <i class="ri-footprint-line"></i>
+                        </div>
+                        <div class="badge-name">10к шагов</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="weekly-calories">
+                <div class="chart-header">
+                                    <div class="chart-title">Еженедельные калории</div>
+                <div class="chart-period">На этой неделе</div>
+                </div>
+                
+                <div class="calories-chart">
+                    <div class="chart-target-line"></div>
+                    <div class="target-label">Цель: 2,100</div>
+                    
+                    <div class="chart-bar" style="height: 70%;">
+                        <div class="bar-day">M</div>
+                    </div>
+                    <div class="chart-bar" style="height: 85%;">
+                        <div class="bar-day">T</div>
+                    </div>
+                    <div class="chart-bar" style="height: 95%;">
+                        <div class="bar-day">W</div>
+                    </div>
+                    <div class="chart-bar" style="height: 80%;">
+                        <div class="bar-day">T</div>
+                    </div>
+                    <div class="chart-bar" style="height: 90%;">
+                        <div class="bar-day">F</div>
+                    </div>
+                    <div class="chart-bar" style="height: 60%;">
+                        <div class="bar-day">S</div>
+                    </div>
+                    <div class="chart-bar" style="height: 75%;">
+                        <div class="bar-day">S</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <div class="nav-item active" onclick="switchScreen('dashboard')">
+            <div class="nav-icon">
+                <i class="ri-home-5-line"></i>
+            </div>
+            <div class="nav-text">Главная</div>
+        </div>
+        
+        <div class="nav-item" onclick="switchScreen('history')">
+            <div class="nav-icon">
+                <i class="ri-history-line"></i>
+            </div>
+            <div class="nav-text">История</div>
+        </div>
+        
+        <div class="add-btn" onclick="switchScreen('food-logging')">
+            <i class="ri-add-line"></i>
+        </div>
+        
+        <div class="nav-item" onclick="switchScreen('progress')">
+            <div class="nav-icon">
+                <i class="ri-line-chart-line"></i>
+            </div>
+            <div class="nav-text">Прогресс</div>
+        </div>
+        
+        <div class="nav-item" onclick="switchScreen('profile')">
+            <div class="nav-icon">
+                <i class="ri-user-line"></i>
+            </div>
+            <div class="nav-text">Профиль</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
