@@ -56,6 +56,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Добавить обработчики для вкладок истории
     setupHistoryTabs();
+    
+    // Добавить обработчик для скрытия клавиатуры
+    setupKeyboardDismiss();
 });
 
 
@@ -199,6 +202,62 @@ function setupHistoryTabs() {
             const period = this.textContent;
             console.log(`Selected period: ${period}`);
         });
+    });
+}
+
+// Функция для скрытия клавиатуры при клике на пустое место
+function setupKeyboardDismiss() {
+    // Обработчик клика на весь документ
+    document.addEventListener('click', function(e) {
+        // Проверяем, является ли цель клика полем ввода
+        const isInput = e.target.tagName === 'INPUT' || 
+                       e.target.tagName === 'TEXTAREA' || 
+                       e.target.classList.contains('food-input');
+        
+        // Если клик не по полю ввода, убираем фокус со всех полей
+        if (!isInput) {
+            // Убираем фокус со всех полей ввода
+            const inputs = document.querySelectorAll('input, textarea');
+            inputs.forEach(input => {
+                if (input === document.activeElement) {
+                    input.blur();
+                }
+            });
+            
+            // Дополнительно для мобильных устройств
+            if (window.innerWidth <= 768) {
+                // Принудительно скрываем клавиатуру на мобильных
+                document.activeElement && document.activeElement.blur();
+                
+                // Альтернативный способ для iOS
+                if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+                    const inputs = document.querySelectorAll('input, textarea');
+                    inputs.forEach(input => {
+                        input.style.fontSize = '16px'; // iOS не показывает клавиатуру для полей с font-size < 16px
+                        setTimeout(() => {
+                            input.style.fontSize = ''; // Возвращаем исходный размер
+                        }, 100);
+                    });
+                }
+            }
+        }
+    });
+    
+    // Дополнительный обработчик для touch событий на мобильных
+    document.addEventListener('touchend', function(e) {
+        const isInput = e.target.tagName === 'INPUT' || 
+                       e.target.tagName === 'TEXTAREA' || 
+                       e.target.classList.contains('food-input');
+        
+        if (!isInput) {
+            // Убираем фокус со всех полей при touch
+            const inputs = document.querySelectorAll('input, textarea');
+            inputs.forEach(input => {
+                if (input === document.activeElement) {
+                    input.blur();
+                }
+            });
+        }
     });
 }
 

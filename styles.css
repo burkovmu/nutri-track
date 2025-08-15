@@ -353,6 +353,20 @@ body {
     box-shadow: 0 0 0 2px rgba(46, 204, 113, 0.2);
 }
 
+/* Улучшения для мобильных устройств */
+@media (max-width: 768px) {
+    .food-input {
+        font-size: 16px; /* iOS не показывает клавиатуру для полей с font-size < 16px */
+        -webkit-appearance: none;
+        border-radius: 12px;
+    }
+    
+    .food-input:focus {
+        transform: scale(1.02);
+        transition: transform 0.2s ease;
+    }
+}
+
 .input-actions {
     display: flex;
     justify-content: space-between;
